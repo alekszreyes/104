@@ -4,6 +4,7 @@
 Used when you need to access private data
 from outside your class
 
+    ```c
     #include <iostream>
 
     using namespace std;
