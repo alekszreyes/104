@@ -4,41 +4,41 @@
 Used when you need to access private data
 from outside your class
 
-    ```c
-    #include <iostream>
+```c
+#include <iostream>
 
-    using namespace std;
+using namespace std;
 
-    class Book {
-    public:
-        Book(string name): _name(name) {}
-        ~Book() {}
+class Book {
+public:
+Book(string name): _name(name) {}
+~Book() {}
 
-        void getName() { cout << _name << endl; }
+void getName() { cout << _name << endl; }
 
-        // friend declaration
-        friend void appendName(Book &b);
+// friend declaration
+friend void appendName(Book &b);
 
-    private:
-        string _name;
+private:
+string _name;
 
-    };
+};
 
-    /***
-    * notice that it is able to access the private data
-    **/
-    void appendName(Book &b) {
-        b._name = b._name + " written by Alex ";
-    }
+/***
+* notice that it is able to access the private data
+**/
+void appendName(Book &b) {
+b._name = b._name + " written by Alex ";
+}
 
-    int main(void)
-    {
-        Book b("Moby Dick");
-        b.getName(); // prints Moby Dick
+int main(void)
+{
+Book b("Moby Dick");
+b.getName(); // prints Moby Dick
 
-        appendName(b);
-        b.getName(); // prints Moby Dick written by Alex
-    }
-    ```
+appendName(b);
+b.getName(); // prints Moby Dick written by Alex
+}
+```
 
 
