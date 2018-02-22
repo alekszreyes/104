@@ -16,7 +16,7 @@ compare two arrays, etc.
 
 In this example, we use it to add a string and a char.
 
-```c
+```c++
 #include <iostream>
 #include <sstream>
 
@@ -120,7 +120,7 @@ int main(void)
 Used when you need to access private data
 from outside your class
 
-```c
+```c++
 #include <iostream>
 
 using namespace std;
@@ -175,7 +175,7 @@ things.
 
 Here is a simple example
 
-```c
+```c++
 #include <iostream>
 
 using namespace std;
@@ -225,7 +225,7 @@ different object.
 
 Here is a simple example.
 
-```c
+```c++
 #include <iostream>
 
 using namespace std;
@@ -277,7 +277,7 @@ int main(void)
 
 ### Insertion sort
 
-```c
+```c++
 #include <iostream>
 
 using namespace std;
@@ -317,7 +317,7 @@ int main(int argc, const char * argv[]) {
 
 This is one of the types of sorting algorithms
 
-```c
+```c++
 #include <iostream>
 #include <vector>
 
