@@ -166,6 +166,7 @@ int main(void)
 ```
 ## Sorting Algorithms
 
+### Insertion sort
 
 ```c
 #include <iostream>
@@ -175,7 +176,10 @@ using namespace std;
 int main(int argc, const char * argv[]) {
 
     int a[] = {4, 3, 1, 5, 9};
-    for(int i = 1; i < 4; i++)
+	int arraySize = 5;
+
+	// we begin at 1
+    for(int i = 1; i < arraySize - 1; i++)
     {
         // keep track of where we are
         int element = a[i];
@@ -191,6 +195,8 @@ int main(int argc, const char * argv[]) {
         // save element in new position
         a[j] = element;
     }
+
+	// we are done. Print the result
     for(int i = 0; i < 4; i++)
     {
         cout << "element: " << a[i] << endl;
