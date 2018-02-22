@@ -66,7 +66,7 @@ Protected is sort of the middle. Children can access these
 arguments within their class declaration but not within the
 object scope.
 
-```c
+```c++
 #include <iostream>
 
 using namespace std;
