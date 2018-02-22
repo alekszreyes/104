@@ -156,6 +156,9 @@ int main(void)
     b.getName(); // prints Moby Dick written by Alex
 }
 ```
+
+
+
 ## Deep copy
 
 Copies, by default, are shallow. That is okay
@@ -211,6 +214,40 @@ int main(void) {
     cout << "st: " << student->_name << endl;
     cout << "cp: " << cp->_name << endl;
 
+}
+```
+
+## Abstract Class
+An abstract class has a pure virtual function.
+The compiler enforces that the abstract class cannot be directly
+instantiated and any class that descends from it must implement
+(override) the pure virtual implementation
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+class Abstract {
+public:
+    // pure virtual
+    virtual void print() = 0;
+};
+
+class Child : Abstract {
+public:
+
+    // compiler enforces you to implement this
+    void print() { cout << "Implemented" << endl; }
+};
+
+int main(void)
+{
+    Child child;
+    child.print();
+
+    // not allowed because it is an abstract class
+    // Abstract a;
 }
 ```
 
