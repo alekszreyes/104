@@ -47,6 +47,64 @@ int main(void)
     b.getName(); // prints Moby Dick written by Alex
 }
 ```
+## Deep copy
+
+Copies, by default, are shallow. That is okay
+when you are working on the stack, but when you
+are working with dynamic memory, what you really
+copy is a pointer. This can lead to segfault or
+other problems when different objects are pointing
+to the same address.
+
+The solution is deep copy. However, it is something you
+have to write yourself. The rule is to include these three
+things.
+
+1. Constructor
+2. Destructor
+3. Operator
+
+Here is a simple example
+
+```c
+#include <iostream>
+
+using namespace std;
+
+class Student {
+    public:
+        Student(int id, string name):
+            _id(id), _name(name) {}
+        int _id;
+        string _name;
+
+    Student* deepCopy() {
+        return new Student(_id, _name);
+    }
+    Student& operator=(const Student &rhs) {
+        if( this == &rhs ) return *this;
+
+        this->_id = rhs._id;
+        this->_name = rhs._name;
+
+        return *this;
+    }
+};
+
+int main(void) {
+
+    // object
+    Student* student = new Student(1, "alex");
+    Student* cp = student->deepCopy();
+
+    cp->_name = "sergio";
+
+    cout << "st: " << student->_name << endl;
+    cout << "cp: " << cp->_name << endl;
+
+}
+```
+
 
 ## Polymorphism
 Sometimes you can have different classes that have the
@@ -106,8 +164,43 @@ int main(void)
     delete t;
 }
 ```
+##Sorting Algorithms
 
-## Selection Sort
+
+```c
+│   ├── print_all.cpp
+#include <iostream>
+
+using namespace std;
+
+/*** MAIN FUNCTION ***/
+int main(int argc, const char * argv[]) {
+
+    int a[] = {4, 3, 1, 5, 9};
+    for(int i = 1; i < 4; i++)
+    {
+        // keep track of where we are
+        int element = a[i];
+        int j = i;
+
+        // while within bounds and previous element is greater than current
+        while(j > 0 && a[j - 1] > element)
+        {
+            // move one space
+            a[j] = a[j - 1];
+            j -= 1;
+        }
+        // save element in new position
+        a[j] = element;
+    }
+    for(int i = 0; i < 4; i++)
+    {
+        cout << "element: " << a[i] << endl;
+    }
+}
+```
+
+### Selection Sort
 
 This is one of the types of sorting algorithms
 
