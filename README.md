@@ -164,16 +164,14 @@ int main(void)
     delete t;
 }
 ```
-##Sorting Algorithms
+## Sorting Algorithms
 
 
 ```c
-│   ├── print_all.cpp
 #include <iostream>
 
 using namespace std;
 
-/*** MAIN FUNCTION ***/
 int main(int argc, const char * argv[]) {
 
     int a[] = {4, 3, 1, 5, 9};
