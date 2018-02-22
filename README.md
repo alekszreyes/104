@@ -7,6 +7,115 @@ to clone, pull or contribute to this.
 Also, notice that there are c++ examples that you can
 browse, compile and execute.
 
+## Overloading
+
+Signs like <, >, +, = are functions too. They act like
+syntactic sugar, making code easier to read. You can
+make your own implementation to add two custom objects,
+compare two arrays, etc.
+
+In this example, we use it to add a string and a char.
+
+```c
+#include <iostream>
+#include <sstream>
+
+using namespace std;
+
+string operator+(string s, char c) {
+
+    // we use string stream
+    stringstream ss;
+
+    // from char to string stream
+    ss << c;
+
+    // here we save the char to string
+    string c_as_string;
+    ss >> c_as_string;
+
+    // we append the former char and return
+    s.append(c_as_string);
+    return s;
+}
+
+int main(void)
+{
+    // overloading
+    string coo = "coo";
+    char l = 'l';
+
+    // calls overload and prints "cool"
+    cout << coo + l << endl;
+}
+```
+
+## Inheritance
+One of the key points to remember about inheritance is
+the public, protected, private relationships.
+
+Public functions and variables allow you to invoke them
+anywhere your object has scope. Children also have access to 
+public stuff.
+
+Private means that you can only access these members from
+within the class declarations and functions, but not within
+your object or the children of your class
+
+Protected is sort of the middle. Children can access these
+arguments within their class declaration but not within the
+object scope.
+
+```c
+#include <iostream>
+
+using namespace std;
+
+class Parent {
+public:
+    
+    void playFunction() {
+        
+        // from here I have access to everything of parent
+        cout << _public + _protected + _private << endl;
+    }
+    
+    string _public = "public ";
+
+protected:
+    string _protected = "protected ";
+    
+private:
+    string _private = "private ";
+};
+
+class Child : private Parent {
+
+public:
+    // from here I only have access to _public and _private
+    void play() {
+        cout << _public + _protected << endl;
+        
+        // but i do not have access to _private
+        // cout << _private; // compiler error
+    }
+    
+};
+
+int main(void)
+{
+    Parent parent;
+    parent.playFunction();
+    
+    cout << parent._public << endl;
+    
+    // but i cannot invoke parent._protected or parent._private
+    
+    Child child;
+    child.play();
+}
+```
+
 ## Friend functions
 Used when you need to access private data
 from outside your class
