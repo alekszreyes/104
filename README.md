@@ -1,5 +1,12 @@
 # CS 104 Midterm Review
 
+Sometimes, the best way to understand a concept
+is seeing minimalistic snippets of code. Feel free
+to clone, pull or contribute to this.
+
+Also, notice that there are c++ examples that you can
+browse, compile and execute.
+
 ## Friend functions
 Used when you need to access private data
 from outside your class
