@@ -3,31 +3,50 @@
 
 using namespace std;
 
-int main(void) {
+// just a helper function to print the vector
+void printVector(vector<int> v) {
+    for(int i = 0, len = (int) v.size(); i < len; i++) {
+        cout << v[i] << " ";
+    }
+    cout << endl;
+}
 
-    static const int a[] = { 13, 9, 6, 3, 15, 2, 21, 4, 16, 8, 11 };
-    vector<int> v(a, a + sizeof(a)/sizeof(a[0]));
-
-    
-    // for each element in vector
-    for(int i = 0, len = (int)v.size(); i < len; i++) {
+void ssort(vector<int> mylist)
+{
+    for(int i = 0, len = (int)mylist.size(); i < len - 1; i++){
         
-        // let's begin with the starting value
+        // min begins as the first element
         int min = i;
         
-        // compare with the rest of the array
-        for(int j = i; j < len; j++) {
-            
-            // if find a smaller one, save as the new min
-            if(v.at(min) > v.at(j)) {
+        for(int j = i + 1; j < (int) mylist.size(); j++){
+        
+            // if min is smaller than current value, save new min
+            if(mylist[j] < mylist[min]) {
                 min = j;
             }
+            
         }
+        // swap i and min
+        int temp = mylist[min];
+        mylist[min] = mylist[i];
+        mylist[i] = temp;
         
-        // when finish iterating, save the min
-        if(min != i) {
-            swap(v.at(i), v.at(min));
-            cout << v.at(i) << endl;
-        }
+        
+        printVector(mylist);
     }
+}
+
+int main(void)
+{
+    // create and populate vector
+    vector<int> v;
+    int array[] = {7, 3, 8, 6, 5, 1};
+    v.insert(v.end(), array, array+6);
+    
+    // printing vector
+    cout << "Printing vector: " << endl;
+    printVector(v);
+    
+    cout << "Bubble sorting: " << endl;
+    ssort(v);
 }

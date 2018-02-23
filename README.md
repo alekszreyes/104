@@ -491,4 +491,53 @@ Bubble sorting:
 3 1 5 6 7 8
 1 3 5 6 7 8
 ```
+### Selection Sort
 
+*From [Lecture slides, p 14](https://piazza-resources.s3.amazonaws.com/jc0zlm0ibz12df/jdz47r0f1qr2y0/L14_sorting.pdf?AWSAccessKeyId=AKIAIEDNRLJ4AZKBW6HA&Expires=1519941734&Signature=EE3ytUXJDww3Z1vbmkgS4OZi6%2Bk%3D)*
+
+Main Idea: Selection sort finds min (or max) and puts at smallest unsorted or (greatest unsorted) index
+
+- Unlike Bubble Sort, Selection Sort only performs one swap per iteration
+- Starts with the whole array unsorted and slowly the sorted portion grows
+- In this implementation, find min and put at start of list
+
+```c++
+// selection_sort.cpp
+// relevant fragment
+void ssort(vector<int> mylist)
+{
+    for(int i = 0, len = (int)mylist.size(); i < len - 1; i++){
+        
+        // min begins as the first element
+        int min = i;
+        
+        for(int j = i + 1; j < (int) mylist.size(); j++){
+        
+            // if min is smaller than current value, save new min
+            if(mylist[j] < mylist[min]) {
+                min = j;
+            }
+            
+        }
+        // swap i and min
+        int temp = mylist[min];
+        mylist[min] = mylist[i];
+        mylist[i] = temp;
+        
+        
+        printVector(mylist);
+    }
+}
+```
+
+This prints the following
+```
+Printing vector:
+7 3 8 6 5 1
+Selection sorting:
+1 3 8 6 5 7
+1 3 8 6 5 7
+1 3 5 6 8 7
+1 3 5 6 8 7
+1 3 5 6 7 8
+``
