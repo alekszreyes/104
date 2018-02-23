@@ -399,3 +399,73 @@ int main(void)
 }
 ```
 
+## Sorting Algorithms
+
+### Bubble Sort
+
+*From [Lecture slides, p 6](https://piazza-resources.s3.amazonaws.com/jc0zlm0ibz12df/jdz47r0f1qr2y0/L14_sorting.pdf?AWSAccessKeyId=AKIAIEDNRLJ4AZKBW6HA&Expires=1519941734&Signature=EE3ytUXJDww3Z1vbmkgS4OZi6%2Bk%3D)*
+
+Main Idea: Bubble up the largest value to the greatest index on list
+
+- Comparing neighbors, moving larger item up and smaller item down until largest item is at greatest index. Repeat on list of remaining elements.
+- Outer loop counts each pass and keeps largest unsorted index
+- Inner loop starts at the lowest index bubbling up largest element to the greatest unsorted index
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+
+void printVector(vector<int> v) {
+    for(int i = 0; i < v.size(); i++) {
+        cout << v[i] << " ";
+    }
+    cout << endl;
+}
+
+void bsort(vector<int> mylist) {
+    
+    for(int i = (int) mylist.size() - 1; i > 0; i--) {
+        
+        for(int j = 0; j < i; j++) {
+            
+            // compares with neighbor
+            if( mylist[j] > mylist[j + 1] ) {
+                
+                // swap j and j + 1
+                int temp = mylist[j];
+                mylist[j] = mylist[j + 1];
+                mylist[j + 1] = temp;
+            }
+            printVector(mylist);
+        }
+    }
+}
+
+int main(void)
+{
+    vector<int> v;
+    v.insert(v.end(), {7, 3, 8, 6, 5, 1});
+    
+    cout << "Printing vector: " << endl;
+    printVector(v);
+    
+    cout << "Bubble sorting: " << endl;
+    bsort(v);
+}
+int main(void)
+{
+    // create and populate vector
+    vector<int> v;
+    int array[] = {7, 3, 8, 6, 5, 1};
+    v.insert(v.end(), array, array+6);
+
+    // printing vector
+    cout << "Printing vector: " << endl;
+    printVector(v);
+
+    cout << "Bubble sorting: " << endl;
+    bsort(v);
+}
+```
