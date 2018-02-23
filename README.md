@@ -454,20 +454,6 @@ int main(void)
     cout << "Bubble sorting: " << endl;
     bsort(v);
 }
-int main(void)
-{
-    // create and populate vector
-    vector<int> v;
-    int array[] = {7, 3, 8, 6, 5, 1};
-    v.insert(v.end(), array, array+6);
-
-    // printing vector
-    cout << "Printing vector: " << endl;
-    printVector(v);
-
-    cout << "Bubble sorting: " << endl;
-    bsort(v);
-}
 ```
 
 This prints as follows
@@ -541,3 +527,43 @@ Selection sorting:
 1 3 5 6 8 7
 1 3 5 6 7 8
 ``
+
+### Insertion Sort
+
+*From [Lecture slides, p 21](https://piazza-resources.s3.amazonaws.com/jc0zlm0ibz12df/jdz47r0f1qr2y0/L14_sorting.pdf?AWSAccessKeyId=AKIAIEDNRLJ4AZKBW6HA&Expires=1519941734&Signature=EE3ytUXJDww3Z1vbmkgS4OZi6%2Bk%3D)*
+
+Main Idea: Imagine we pick up one element of the array at a time and then just insert it into the right position.
+
+The relevant port of the code
+
+```c++
+void isort(vector<int> mylist) {
+
+    for(int i = 1; i < (int) mylist.size(); i++){
+
+        int val = mylist[i];
+        int hole = i;
+
+        while(hole > 0 && val < mylist[hole - 1]) {
+
+            mylist[hole] = mylist[hole - 1];
+            hole--;
+        }
+        mylist[hole] = val;
+        printVector(mylist);
+    }
+}
+```
+
+This prints
+
+```
+Printing vector:
+7 3 8 6 5 1
+Insertion sorting:
+3 7 8 6 5 1
+3 7 8 6 5 1
+3 6 7 8 5 1
+3 5 6 7 8 1
+1 3 5 6 7 8
+```
