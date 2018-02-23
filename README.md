@@ -526,7 +526,7 @@ Selection sorting:
 1 3 5 6 8 7
 1 3 5 6 8 7
 1 3 5 6 7 8
-``
+```
 
 ### Insertion Sort
 
