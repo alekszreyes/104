@@ -271,40 +271,88 @@ has not been implemented.
 
 ```c++
 #include <iostream>
-
 using namespace std;
 
-class Student {
-    public:
-        Student(int id, string name):
-            _id(id), _name(name) {}
-        int _id;
-        string _name;
+class MyArray
+{
+ public:
+  MyArray() { cout << "In default constructor" << endl;
+              dat = NULL; len = 0; }
+  MyArray(int d[], int num); //normal
+  MyArray(const MyArray& other); // copy constructor
+   MyArray& operator=(const MyArray& other);  
+  ~MyArray();
+  int& operator[](int loc) { return dat[loc]; }
+  int const & operator[](int loc) const { return dat[loc]; }
+  int size() const         { return len;      }
+ private:
+  int len; int *dat;
 
-    Student* deepCopy() {
-        return new Student(_id, _name);
-    }
-    Student& operator=(const Student &rhs) {
-        if( this == &rhs ) return *this;
-
-        this->_id = rhs._id;
-        this->_name = rhs._name;
-
-        return *this;
-    }
 };
 
-int main(void) {
+// Normal constructor
+MyArray::MyArray(int d[], int num)
+{
+  cout << "In normal constructor" << endl;
+  dat = new int[num]; len = num;
+  for(int i=0; i < len; i++){
+    dat[i] = d[i];
+  }
+}
 
-    // object
-    Student* student = new Student(1, "alex");
-    Student* cp = student->deepCopy();
+// Copy Constructor
+MyArray::MyArray(const MyArray& other)
+{
+   cout << "In copy constructor" << endl;
+   len = other.len;
+   dat = new int[len];
+   for(int i=0; i < len; i++){
+     dat[i] = other.dat[i];  
+   }
+}
 
-    cp->_name = "sergio";
+// Assignment operator
+ MyArray& MyArray::operator=(const MyArray& other)  
+{
+   cout << "In assignment operator" << endl;
+    if(this == &other) return *this;
+    if(dat != NULL) { delete [] dat; }
+    len = other.len;
+    dat = new int[len];
+    for(int i=0; i < len; i++){
+       dat[i] = other.dat[i];   
+    }
+   return *this;
+      
+}
 
-    cout << "st: " << student->_name << endl;
-    cout << "cp: " << cp->_name << endl;
+MyArray::~MyArray()
+{  
+ cout << "In destructor" << endl;
+ delete [] dat; 
+}
 
+
+void printVals(const MyArray& arr)
+{
+  for(int i=0; i < arr.size(); i++){
+    cout << arr[i] << " ";
+  }
+  cout << endl;
+}
+
+int main()
+{
+  int vals[] = {9,3,7,5};
+  MyArray a1(vals,4);
+  MyArray a2(a1); 
+  MyArray a3 = a1; 
+  MyArray a4;  
+
+  a1 = a1;
+  printVals(a1);
+   
+  return 0;
 }
 ```
 
