@@ -194,6 +194,39 @@ copy is a pointer. This can lead to segfault or
 other problems when different objects are pointing
 to the same address.
 
+### The Problem
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+class Student {
+public:
+    Student(string name):_name(name){}
+    string _name;
+};
+
+
+int main(void)
+{
+    Student* a = new Student("alex");
+    
+    // this is a problem because both students
+    // are pointing to the same object
+    Student* b = a;
+    
+    // so if I mutate b, you mutate a as well
+    b->_name = "sergio";
+    
+    // will print sergio
+    cout << "a: " << a->_name << endl;
+    
+}
+```
+
+### Solution
+
 The solution is deep copy. However, it is something you
 have to write yourself. The rule is to include these three
 things.
@@ -415,3 +448,25 @@ int main(void) {
     }
 }
 ```
+
+## const
+
+You can have the compiler help you enforce that a value will be
+read only. A const within the parameter prevents the function
+to change its value. It is usually used when you pass a value by reference.
+
+```c++
+	void hello(const int& n) { cout << n << endl; }
+```
+
+A const before the return type enforces that the variable returned
+by your function will not be mutable.
+
+```c++
+const int get() { return 5; }
+```
+
+## Try and Catch
+
+When a code might fail, you can enclose it in a try and catch
+closure. If the code fails, an exception will be triggered.
