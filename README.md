@@ -4,13 +4,27 @@ Sometimes, the best way to understand a concept
 is seeing minimalistic snippets of code. Feel free
 to clone, pull or contribute to this.
 
-Also, notice that there are c++ examples that you can
-browse, compile and execute.
+Except when not found, all definitions shown below 
+are taken from the 
+[official lecture notes](http://www-bcf.usc.edu/%7Edkempe/teaching/DataStructures.pdf)
+or the lecture handouts available in the [course website](http://bits.usc.edu/cs104/schedule.html). For such exceptions, a source is quoted and
+credited.
+
+The snippets of code were written by me, a student. Although
+they were compiled and tested without errors, they are not official
+from the staff. They are meant to be simplified versions devoided
+from distractions to better illustrate a concept.
+
+Also, notice that there are C++ files included in this repo
+containing the examples shown below. You are welcome to browse, 
+compile and execute them.
 
 ## Recursion
-A recursion function it is one that calls itself
-until it finds a base case. Here is an example with the
-fibonacci sequence.
+
+*Lecture notes p. 27*
+
+The adjective recursive means “defined in terms of itself”. 
+Here is an example with the fibonacci sequence.
 
 ```c++
 #include <iostream>
@@ -35,12 +49,24 @@ int main(void)
 
 ## Overloading
 
-Signs like <, >, +, = are functions too. They act like
-syntactic sugar, making code easier to read. You can
-make your own implementation to add two custom objects,
-compare two arrays, etc.
+*Lecture notes p. 73*
 
-In this example, we use it to add a string and a char.
+Function overloading simply means having multiple functions 
+of the same name, but with different types of parameters.
+
+Operators are symbols such as ==, !=, = (assignment), 
+<=, +, -, ++, * (multiplication, and dereferencing), 
+[], <<, >>, and many others. 
+
+Using operators is really just shorthand for calling a function. 
+
+When you write the following code:
+    if ( a1 == a2 ) cout << "They’re equal!";
+
+it actually gets translated to
+    if (operator==(a1, a2)) cout << "They’re equal!";
+
+In this example, we use overload + to add a string and a char.
 
 ```c++
 #include <iostream>
@@ -77,20 +103,16 @@ int main(void)
 ```
 
 ## Inheritance
-One of the key points to remember about inheritance is
-the public, protected, private relationships.
 
-Public functions and variables allow you to invoke them
-anywhere your object has scope. Children also have access to 
-public stuff.
+*Lecture notes p. 90*
 
-Private means that you can only access these members from
-within the class declarations and functions, but not within
-your object or the children of your class
+**public:** everyone (other classes, this class) can access the field.
 
-Protected is sort of the middle. Children can access these
-arguments within their class declaration but not within the
-object scope.
+**private:** only objects of the same class can access the field. 
+One object of class A may access the private fields of 
+another object of class A.
+
+**protected:** only objects of the same or inheriting classes can access the field.
 
 ```c++
 #include <iostream>
@@ -143,8 +165,14 @@ int main(void)
 ```
 
 ## Friend functions
-Used when you need to access private data
-from outside your class
+
+*Lecture notes p. 78*
+
+What we’d really like to do is say that these variables are 
+still private, but we’ll make an exception just for this one 
+particular function operator\*. 
+C++ has a mechanism for doing this: 
+you do this by declaring a function a friend of a class
 
 ```c++
 #include <iostream>
@@ -187,12 +215,13 @@ int main(void)
 
 ## Deep copy
 
-Copies, by default, are shallow. That is okay
-when you are working on the stack, but when you
-are working with dynamic memory, what you really
-copy is a pointer. This can lead to segfault or
-other problems when different objects are pointing
-to the same address.
+*No official definition was found on the 104 class notes
+or handouts. The following definition is taken from 
+[freedosaurus.com](http://www.fredosaurus.com/notes-cpp/oop-condestructors/shallowdeepcopy.html)*
+
+A shallow copy of an object copies all of the member field values. This works well if the fields are values, but may not be what you want for fields that point to dynamically allocated memory. The pointer will be copied. but the memory it points to will not be copied -- the field in both the original object and the copy will then point to the same dynamically allocated memory, which is not usually what you want. The default copy constructor and assignment operator make shallow copies.
+
+A deep copy copies all fields, and makes copies of dynamically allocated memory pointed to by the fields. To make a deep copy, you must write a copy constructor and overload the assignment operator, otherwise the copy will point to the original, with disasterous consequences.
 
 ### The Problem
 
@@ -235,7 +264,8 @@ things.
 2. Destructor
 3. Operator
 
-Here is a simple example
+Here is a simple example. A word of warning: the operator
+has not been implemented.
 
 ```c++
 #include <iostream>
@@ -277,10 +307,11 @@ int main(void) {
 ```
 
 ## Abstract Class
-An abstract class has a pure virtual function.
-The compiler enforces that the abstract class cannot be directly
-instantiated and any class that descends from it must implement
-(override) the pure virtual implementation
+
+*Lecture notes p. 94*
+
+
+Of course, if a class has one or more pure virtual functions in it, the class cannot be instantiated. Such a class is called an abstract class. No object can be created from an abstract class.
 
 ```c++
 #include <iostream>
@@ -312,12 +343,10 @@ int main(void)
 
 
 ## Polymorphism
-Sometimes you can have different classes that have the
-same function but each function does different things.
 
-You can take a pointer, assign it to one of the objects,
-call the function of that object, and then repeat for a
-different object.
+*Lecture notes p. 96*
+
+Determining which version of a class member function to call at runtime — is called polymorphism, which literally means “many forms”: the object stored in a variable could be one of many forms, and the execution will do “the right thing” for the current object.
 
 Here is a simple example.
 
@@ -449,24 +478,3 @@ int main(void) {
 }
 ```
 
-## const
-
-You can have the compiler help you enforce that a value will be
-read only. A const within the parameter prevents the function
-to change its value. It is usually used when you pass a value by reference.
-
-```c++
-	void hello(const int& n) { cout << n << endl; }
-```
-
-A const before the return type enforces that the variable returned
-by your function will not be mutable.
-
-```c++
-const int get() { return 5; }
-```
-
-## Try and Catch
-
-When a code might fail, you can enclose it in a try and catch
-closure. If the code fails, an exception will be triggered.
