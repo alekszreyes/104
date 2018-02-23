@@ -61,9 +61,11 @@ Operators are symbols such as ==, !=, = (assignment),
 Using operators is really just shorthand for calling a function. 
 
 When you write the following code:
+
     if ( a1 == a2 ) cout << "They’re equal!";
 
 it actually gets translated to
+
     if (operator==(a1, a2)) cout << "They’re equal!";
 
 In this example, we use overload + to add a string and a char.
