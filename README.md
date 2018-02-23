@@ -172,7 +172,7 @@ int main(void)
 
 What we’d really like to do is say that these variables are 
 still private, but we’ll make an exception just for this one 
-particular function operator\*. 
+particular function `operator\*`. 
 C++ has a mechanism for doing this: 
 you do this by declaring a function a friend of a class
 
