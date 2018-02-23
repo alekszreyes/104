@@ -47,6 +47,6 @@ int main(void)
     cout << "Printing vector: " << endl;
     printVector(v);
     
-    cout << "Bubble sorting: " << endl;
+    cout << "Selection sorting: " << endl;
     ssort(v);
 }
